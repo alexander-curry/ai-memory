@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-brand: #6852fa;
+  --color-brand-dark: #5641e8;
+  --color-brand-subtle: #eae7fe;
+  --color-ink: #0f172a;
+  --color-ink-2: #45556c;
+  --color-ink-3: #8f959e;
+  --color-app: #eaeaea;
+  --color-card: #f3f3f3;
+  --color-field: #f6f6f6;
+  --color-line: #e3e5e8;
+  --color-tint-green: #dcf2e0;
+  --color-tint-blue: #d3e5fd;
+  --color-tint-purple: #e8dcf7;
+  --color-tint-neutral: #f2f3f4;
+  --color-success: #1faf38;
+  --color-error: #e3382c;
+  --color-warning: #f8b300;
+
+  --animate-push: push-in 320ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+  --animate-pop: pop-in 280ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+  --animate-fade: fade-in 260ms ease-out both;
+  --animate-rise: rise-in 420ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+  --animate-sheet: sheet-up 340ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes push-in {
+    from { transform: translateX(28%); opacity: 0.4; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes pop-in {
+    from { transform: translateX(-12%); opacity: 0.6; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes sheet-up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+}
+
+:root {
+  /* safe areas: real device insets on phones, simulated inside the desktop frame */
+  --sat: max(env(safe-area-inset-top), 12px);
+  --sab: max(env(safe-area-inset-bottom), 10px);
+}
+
+@media (min-width: 640px) {
+  .phone {
+    --sat: 50px;
+    --sab: 28px;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0d0d10;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font-size: 16px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.press {
+  transition: transform 140ms ease, opacity 140ms ease, background-color 160ms ease;
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+.card {
+  background: #f3f3f3;
+  border: 1px solid #ffffff;
+  border-radius: 16px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+}
+
+.sheet-bg {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f2ff 55%, #ebe7ff 100%);
+}
+
+.onboarding-bg {
+  background: linear-gradient(180deg, #f6f6f8 0%, #ececee 100%);
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.09) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+}
+
+.typing span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #8f959e;
+  margin: 0 2px;
+  animation: typing 1.2s infinite ease-in-out;
+}
+.typing span:nth-child(2) { animation-delay: 0.15s; }
+.typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #e9e9eb 0%, #f5f5f7 50%, #e9e9eb 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.spin-slow {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2.4s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.orbit {
+  animation: orbit 18s linear infinite;
+}
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
