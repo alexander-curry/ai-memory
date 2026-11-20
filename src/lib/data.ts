@@ -278,7 +278,7 @@ export const ITEMS: Item[] = [
     collectionId: "gift-ideas",
     type: "reservation",
     title: "Birthday dinner at The Garden Restaurant",
-    detail: "Table for 8 at 20:30, check in from 20:00",
+    detail: "Table for 8, check in from 20:00",
     eventInDays: 18,
     time: "20:30",
     channel: "whatsapp",

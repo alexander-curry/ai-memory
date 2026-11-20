@@ -107,7 +107,7 @@ export function Home() {
       <section className="mt-6">
         <SectionHeader title="My collections" action="View all" onAction={() => push("collections")} />
         {collections.length ? (
-          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2.5 overflow-x-auto px-4 pb-1">
+          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-2.5 overflow-x-auto px-4 pb-1">
             {collections.map((c) => (
               <CollectionTile
                 key={c.id}

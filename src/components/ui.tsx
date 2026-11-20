@@ -238,7 +238,7 @@ export function Toggle({ on, onChange, label }: { on: boolean; onChange: (v: boo
     >
       <span
         className={cx(
-          "absolute top-[3px] h-6 w-6 rounded-full bg-white shadow-[0_2px_4px_rgba(0,0,0,0.18)] transition-transform duration-200",
+          "absolute left-0 top-[3px] h-6 w-6 rounded-full bg-white shadow-[0_2px_4px_rgba(0,0,0,0.18)] transition-transform duration-200",
           on ? "translate-x-[23px]" : "translate-x-[3px]",
         )}
       />

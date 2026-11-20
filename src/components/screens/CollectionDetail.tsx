@@ -106,7 +106,7 @@ function LinkRow({ item, onOpen }: { item: Item; onOpen: () => void }) {
       </span>
       <div className="min-w-0 flex-1">
         <div className="truncate text-[14px] font-medium text-ink">{item.title}</div>
-        <div className="truncate text-[12px] text-ink-2">{item.url?.replace(/^https?:\/\/(www\.)?/, "")}</div>
+        <div className="truncate text-[12px] text-ink-2">{item.detail ?? item.url?.replace(/^https?:\/\/(www\.)?/, "")}</div>
       </div>
       <BrandIcon id={item.channel} size={18} />
     </button>
@@ -183,8 +183,8 @@ export function CollectionDetail({ route }: ScreenProps) {
   const active = filterCount(filters) > 0 || q.trim().length > 0;
 
   return (
-    <div className="no-scrollbar absolute inset-0 overflow-y-auto" style={{ background: TINTS[col.tint] }}>
-      <div className="px-4 pb-4 pt-[calc(var(--sat)+10px)]">
+    <div className="no-scrollbar absolute inset-0 flex flex-col overflow-y-auto" style={{ background: TINTS[col.tint] }}>
+      <div className="shrink-0 px-4 pb-4 pt-[calc(var(--sat)+10px)]">
         <div className="flex items-start gap-3">
           <Img
             src={col.cover}
@@ -198,7 +198,7 @@ export function CollectionDetail({ route }: ScreenProps) {
             <div className="mt-0.5 flex items-center gap-1.5 text-[13px] text-ink-2">
               {contacts.length > 0 && <AvatarStack contacts={contacts} size={20} />}
               <span className="truncate">
-                {contacts.length ? `${contacts.length} contact${contacts.length > 1 ? "s" : ""} · ` : ""}Updated {ago(col.updatedMinsAgo)}
+                {contacts.length ? `${contacts.length} contact${contacts.length > 1 ? "s" : ""} · ` : "Updated "}{ago(col.updatedMinsAgo)}
               </span>
             </div>
           </div>
@@ -255,7 +255,7 @@ export function CollectionDetail({ route }: ScreenProps) {
         )}
       </div>
 
-      <div className="min-h-[60%] rounded-t-[28px] bg-white px-4 pb-[calc(var(--sab)+28px)] pt-6">
+      <div className="flex-1 rounded-t-[28px] bg-white px-4 pb-[calc(var(--sab)+28px)] pt-6">
         {active ? (
           <Results col={col} filters={filters} q={q} onItem={setOpenItem} onMedia={(list, index) => setMedia({ list, index })} onClear={() => { setFilters(EMPTY); setQ(""); }} />
         ) : (

@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState, type ComponentType } from "react";
+import { useEffect, useMemo, useState, type ComponentType } from "react";
 import { House, Users, Settings as SettingsIcon, MessageCircleMore, Signal, Wifi, BatteryFull } from "lucide-react";
 import { useApp, useNav, type Route, type RouteName } from "@/lib/store";
 import { Toaster, cx } from "./ui";
+import { useView } from "@/lib/useView";
+import { TINTS } from "@/lib/data";
 import { Welcome, ObAI, ObPrivacy, ObConnect, ObMain, ObBuilding, SignIn } from "./screens/Onboarding";
 import { Home } from "./screens/Home";
 import { Collections } from "./screens/Collections";
@@ -61,6 +63,15 @@ export default function App() {
   }, []);
 
   const top = stack[stack.length - 1];
+  const view = useView();
+  const scrim = useMemo(() => {
+    if (top.name === "collection") {
+      const c = view.collection(top.params?.id ?? "");
+      return c ? TINTS[c.tint] : "#eaeaea";
+    }
+    if (top.name.startsWith("ob-") || top.name === "welcome" || top.name === "signin") return "#f6f6f8";
+    return "#eaeaea";
+  }, [top, view]);
   const showTabs = ready && stage === "app" && TAB_ROUTES.includes(top.name);
 
   return (
@@ -91,7 +102,7 @@ export default function App() {
 
         {showTabs && <TabBar current={stack[0].name} />}
 
-        <StatusBar />
+        <StatusBar color={scrim} />
         <div className="pointer-events-none absolute bottom-2 left-1/2 z-[70] hidden h-[5px] w-[134px] -translate-x-1/2 rounded-full bg-[#0f172a] sm:block" />
         <Toaster />
         <div id="overlay-root" className="pointer-events-none absolute inset-0 z-50" />
@@ -100,14 +111,17 @@ export default function App() {
   );
 }
 
-function StatusBar() {
+function StatusBar({ color }: { color: string }) {
   const [time, setTime] = useState(() => fmt(new Date()));
   useEffect(() => {
     const t = setInterval(() => setTime(fmt(new Date())), 15000);
     return () => clearInterval(t);
   }, []);
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-0 z-[65] hidden h-[50px] items-center justify-between px-9 pt-1 text-[15px] font-semibold text-ink sm:flex">
+    <div
+      className="pointer-events-none absolute inset-x-0 top-0 z-40 hidden h-[50px] items-center justify-between px-9 pt-1 text-[15px] font-semibold text-ink transition-colors sm:flex"
+      style={{ background: `linear-gradient(to bottom, ${color} 72%, transparent)` }}
+    >
       <span>{time}</span>
       <span className="flex items-center gap-1.5">
         <Signal size={16} strokeWidth={2.6} />

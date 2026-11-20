@@ -247,7 +247,7 @@ export function ObPrivacy() {
               </div>
             </div>
           ))}
-          <div className="absolute left-[73%] top-[64%] flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-[12px] font-medium text-ink shadow-sm">
+          <div className="absolute left-[73%] top-[64%] flex items-center gap-1.5 whitespace-nowrap rounded-full bg-white/90 px-3 py-1.5 text-[12px] font-medium text-ink shadow-sm">
             <Lock size={13} className="text-success" /> On-device
           </div>
         </div>
